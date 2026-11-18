@@ -2,7 +2,7 @@
 // @name           Profile Button
 // @description    Adds a profiles button to the Zen toolbar. Click it to switch, create or manage profiles.
 // @author         Jprdgza
-// @version        1.0.0
+// @version        1.0.1
 // @include        chrome://browser/content/browser.xhtml
 // ==/UserScript==
 
@@ -63,8 +63,37 @@
       return;
     }
 
+    restoreBackButton(win);
     await win.gProfiles.populateSubView();
-    win.PanelUI.showSubView("PanelUI-profiles", node);
+    await win.PanelUI.showSubView("PanelUI-profiles", node);
+
+    // Put the back button back once our panel closes, so the app menu's
+    // Profiles view (and our next open) keep working.
+    const panel = win.document.getElementById("customizationui-widget-panel");
+    panel?.addEventListener(
+      "popuphidden",
+      () => win.setTimeout(() => restoreBackButton(win), 0),
+      { once: true },
+    );
+  }
+
+  // Opening the profiles view on its own makes it a "main view", and Firefox
+  // deletes the back button from main views. Firefox's own profiles code
+  // expects that button, so without it the panel stops opening after the
+  // first time.
+  function restoreBackButton(win) {
+    const doc = win.document;
+    const view = win.PanelMultiView.getViewNode(doc, "PanelUI-profiles");
+    const header = view?.querySelector("#PanelUI-profiles-header");
+    if (!header || header.querySelector("#profiles-appmenu-back-button")) {
+      return;
+    }
+    const back = doc.createXULElement("toolbarbutton");
+    back.id = "profiles-appmenu-back-button";
+    back.className = "subviewbutton subviewbutton-iconic subviewbutton-back";
+    back.setAttribute("tabindex", "0");
+    back.setAttribute("closemenu", "none");
+    header.prepend(back);
   }
 
   function createWidget() {
