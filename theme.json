@@ -1,0 +1,23 @@
+{
+  "id": "zen-profile-button",
+  "name": "Profile Button",
+  "description": "Adds a profiles button to the top-left toolbar. One click to switch, create or manage profiles.",
+  "homepage": "https://github.com/Jprdgza/zen-profile-button",
+  "image": "https://raw.githubusercontent.com/Jprdgza/zen-profile-button/main/images/preview.png",
+  "readme": "https://raw.githubusercontent.com/Jprdgza/zen-profile-button/main/README.md",
+  "author": "Jprdgza",
+  "version": "1.0.0",
+  "style": {
+    "chrome": "chrome.css"
+  },
+  "scripts": {
+    "profile-button.uc.js": {
+      "include": ["chrome://browser/content/browser.xhtml"]
+    }
+  },
+  "preferences": "preferences.json",
+  "tags": ["Javascript", "Toolbar", "Profiles"],
+  "createdAt": "2026-11-18",
+  "updatedAt": "2026-11-18",
+  "fork": ["zen"]
+}

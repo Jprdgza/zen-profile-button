@@ -1,0 +1,8 @@
+[
+  {
+    "property": "zen-profile-button.show-avatar",
+    "label": "Show the current profile's avatar instead of the person icon",
+    "type": "checkbox",
+    "default": false
+  }
+]

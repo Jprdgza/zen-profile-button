@@ -1,0 +1,14 @@
+/* Profile Button for Zen — https://github.com/Jprdgza/zen-profile-button */
+
+/* Round the avatar when "Show profile avatar" is on. */
+#zen-profile-button[profile-avatar] > .toolbarbutton-icon {
+  border-radius: 50%;
+}
+
+/* The profiles panel opens on its own here, so its "back" arrow has nowhere to go. */
+#customizationui-widget-panel[viewId="PanelUI-profiles"]
+  #profiles-appmenu-back-button,
+#customizationui-widget-panel[viewId="PanelUI-fxa-menu-create-profile"]
+  .subviewbutton-back {
+  display: none;
+}
